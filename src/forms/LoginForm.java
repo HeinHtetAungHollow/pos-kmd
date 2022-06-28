@@ -13,7 +13,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 import models.Employee;
+import models.UserRole;
 import services.EmployeeServices;
+import services.LoginServices;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -26,6 +28,7 @@ public class LoginForm {
 	private JButton btnLogin;
 	private Employee employee;
 	private EmployeeServices employeeServices;
+	private LoginServices loginServices;
 
 	/**
 	 * Launch the application.
@@ -48,18 +51,23 @@ public class LoginForm {
 	 */
 	public LoginForm() {
 		initialize();
-		this.employeeServices = new EmployeeServices();
+		initializeDepen();
 	}
 
 	public LoginForm(Employee employee) {
 		this.employee = employee;
+		initializeDepen();
 		initialize();
-		this.employeeServices = new EmployeeServices();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	private void initializeDepen() {
+		this.employeeServices = new EmployeeServices();
+		this.loginServices = new LoginServices();
+	}
+
 	private void initialize() {
 		loginFrame = new JFrame();
 		loginFrame.setBounds(100, 100, 450, 300);
@@ -91,29 +99,46 @@ public class LoginForm {
 		btnLogin = new JButton(employee != null ? "Create Account" : "Login");
 		btnLogin.setBounds(155, 191, 91, 21);
 		loginFrame.getContentPane().add(btnLogin);
-		
+
 		btnLogin.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (employee!=null) {
-					
-					
+				if (employee != null) {
+
 					employee.setPassword(String.valueOf(passwordFieldPw.getPassword()));
 					employee.setUsername(textFieldUsername.getText());
 					System.out.println(employee.getPassword());
+
 					if (!employee.getPassword().isBlank() && !employee.getUsername().isBlank()) {
 						employeeServices.updateEmployee(String.valueOf(employee.getEmp_id()), employee);
 						JOptionPane.showMessageDialog(null, "Success");
-						EmployeeForm employeeForm=new EmployeeForm();
+						EmployeeForm employeeForm = new EmployeeForm();
 						employeeForm.employeeFrame.setVisible(true);
 						loginFrame.setVisible(false);
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Input all Fields!");
 					}
-				}else {
-					
+				} else {
+					employee = new Employee();
+					String username = textFieldUsername.getText();
+					String password = String.valueOf(passwordFieldPw.getPassword());
+
+					if (!username.isBlank() && !password.isBlank()) {
+						employee = loginServices.login(username, password);
+						if (employee != null) {
+							AdminForm adminForm=new AdminForm();
+							EmployeeForm employeeForm = new EmployeeForm();
+							if(employee.getRole().equals(UserRole.ADMIN) ) {
+								adminForm.adminFrame.setVisible(true);
+								loginFrame.setVisible(false);
+							}else {
+								employeeForm.employeeFrame.setVisible(true);
+								loginFrame.setVisible(false);
+							}
+						}
+					}
 				}
 			}
 		});

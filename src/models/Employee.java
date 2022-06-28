@@ -9,13 +9,13 @@ public class Employee {
 	private String emp_address;
 	private String username;
 	private String password;
-	private String role;
+	private UserRole role;
 	private boolean active;
 	
 	public Employee() {}
 	
 	public Employee(int emp_id, String emp_name, String emp_phone, String emp_mail, String emp_address, String username,
-			String password, String role, boolean active) {
+			String password, UserRole role, boolean active) {
 		super();
 		this.emp_id = emp_id;
 		this.emp_name = emp_name;
@@ -69,10 +69,10 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 	public boolean getActive() {

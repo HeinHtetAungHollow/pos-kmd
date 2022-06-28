@@ -3,6 +3,7 @@ package util.mapper;
 import java.sql.ResultSet;
 
 import models.Employee;
+import models.UserRole;
 
 public class MapToEmployee {
 	public Employee mapEmployee(Employee employee,ResultSet rs) {
@@ -13,7 +14,7 @@ public class MapToEmployee {
             employee.setEmp_mail(rs.getString("emp_email"));
             employee.setEmp_address(rs.getString("emp_address"));
             employee.setUsername(rs.getString("username"));
-            employee.setRole(rs.getString("role"));
+            employee.setRole(UserRole.valueOf(rs.getString("role")));
             employee.setActive(rs.getBoolean("active"));
         } catch (Exception e) {
             e.printStackTrace();

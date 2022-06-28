@@ -28,13 +28,13 @@ public class EmployeeServices implements EmployeeRepo {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement pst = this.db_Config.getConnection().prepareStatement(
-					"INSERT INTO employee (emp_name, emp_phone, emp_email, emp_address, active, role) VALUES (?, ?, ?, ?, ?, ?)");
+					"INSERT INTO employee (emp_name, emp_phone, emp_email, emp_address, active) VALUES (?, ?, ?, ?, ?)");
 			pst.setString(1, employee.getEmp_name());
 			pst.setString(2, employee.getEmp_phone());
 			pst.setString(3, employee.getEmp_mail());
 			pst.setString(4, employee.getEmp_address());
 			pst.setBoolean(5, true);
-			pst.setString(6, employee.getRole());
+			//pst.setString(6, employee.getRole());
 
 			pst.executeUpdate();
 			pst.close();
@@ -52,7 +52,7 @@ public class EmployeeServices implements EmployeeRepo {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement pst = this.db_Config.getConnection().prepareStatement(
-					"UPDATE employee SET emp_name=?,emp_phone=?,emp_email=?,emp_address=?,username=?,password=?,emp_role=? WHERE emp_id=?");
+					"UPDATE employee SET emp_name=?,emp_phone=?,emp_email=?,emp_address=?,username=?,password=?,role=? WHERE emp_id='"+id+"'");
 			pst.setString(1, employee.getEmp_name());
 			pst.setString(2, employee.getEmp_phone());
 			pst.setString(3, employee.getEmp_mail());
@@ -61,13 +61,13 @@ public class EmployeeServices implements EmployeeRepo {
 			System.out.println(employee.getUsername());
 			pst.setString(6, employee.getPassword());
 			System.out.println(employee.getPassword());
-			pst.setString(7, employee.getRole());
-			pst.setString(8, id);
-			System.out.println(id);
+			pst.setString(7, employee.getRole().toString());
+			
 			pst.executeUpdate();
 			pst.close();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			if (e instanceof SQLIntegrityConstraintViolationException) {
 				JOptionPane.showMessageDialog(null, "Already exists");
 			}

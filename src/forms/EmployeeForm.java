@@ -157,14 +157,14 @@ public class EmployeeForm {
 		lblEmail.setBounds(51, 123, 50, 13);
 		employeeFrame.getContentPane().add(lblEmail);
 
-		textFieldRole = new JTextField();
-		textFieldRole.setColumns(45);
-		textFieldRole.setBounds(369, 117, 134, 19);
-		employeeFrame.getContentPane().add(textFieldRole);
+//		textFieldRole = new JTextField();
+//		textFieldRole.setColumns(45);
+//		textFieldRole.setBounds(369, 117, 134, 19);
+//		employeeFrame.getContentPane().add(textFieldRole);
 
-		JLabel lblRole = new JLabel("Role");
-		lblRole.setBounds(295, 120, 50, 13);
-		employeeFrame.getContentPane().add(lblRole);
+//		JLabel lblRole = new JLabel("Role");
+//		lblRole.setBounds(295, 120, 50, 13);
+//		employeeFrame.getContentPane().add(lblRole);
 
 		textAreaAddress = new JTextArea();
 		textAreaAddress.setBounds(581, 65, 191, 73);
@@ -208,17 +208,17 @@ public class EmployeeForm {
 					employee.setEmp_mail(textFieldEmail.getText());
 					employee.setEmp_phone(textFieldPhone.getText());
 					employee.setEmp_address(textAreaAddress.getText());
-					employee.setRole(textFieldRole.getText());
+					//employee.setRole(textFieldRole.getText());
 					
 					if (!employee.getEmp_name().isBlank() && !employee.getEmp_mail().isBlank()
 							&& !employee.getEmp_phone().isBlank() && !employee.getEmp_address().isBlank()
-							&& !employee.getRole().isBlank()) {
+							) {
 						employeeServices.updateEmployee(String.valueOf(employee.getEmp_id()), employee);
-						JOptionPane.showMessageDialog(btnUpdate, "Update Successful","Update Process",1);
+						JOptionPane.showMessageDialog(null, "Update Successful","Update Process",1);
 						resetForm();
 						loadEmp(Optional.empty());
 					}else {
-						JOptionPane.showMessageDialog(btnUpdate, "Input All Fields","Update Process",0);
+						JOptionPane.showMessageDialog(null, "Input All Fields","Update Process",0);
 					}
 				}
 			}
@@ -232,13 +232,13 @@ public class EmployeeForm {
 				employee = new Employee();
 				
 				if (!(textFieldName.getText().isBlank()) && !(textFieldEmail.getText().isBlank())
-						&& !(textFieldPhone.getText().isBlank()) && !(textFieldRole.getText().isBlank())
+						&& !(textFieldPhone.getText().isBlank())
 						&& !(textAreaAddress.getText().isBlank())) {
 					employee.setEmp_name(textFieldName.getText());
 					employee.setEmp_address(textAreaAddress.getText());
 					employee.setEmp_phone(textFieldPhone.getText());
 					employee.setEmp_mail(textFieldEmail.getText());
-					employee.setRole(textFieldRole.getText());
+					//employee.setRole(textFieldRole.getText());
 					employee.setActive(true);
 					employeeServices.saveEmployee(employee);
 					JOptionPane.showMessageDialog(btnSave, "Save Successful", "Save Process", 1);
@@ -260,7 +260,7 @@ public class EmployeeForm {
 				textFieldName.setText(employee.getEmp_name());
 				textFieldEmail.setText(employee.getEmp_mail());
 				textFieldPhone.setText(employee.getEmp_phone());
-				textFieldRole.setText(employee.getRole());
+				//textFieldRole.setText(employee.getRole().toString());
 				textAreaAddress.append(employee.getEmp_address());
 			}
 		});

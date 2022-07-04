@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import util.login.CurrentLogginUser;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +16,7 @@ import javax.swing.JButton;
 public class AdminForm {
 
 	public JFrame adminFrame;
+
 
 	/**
 	 * Launch the application.
@@ -45,38 +49,39 @@ public class AdminForm {
 		adminFrame.setBounds(100, 100, 800, 600);
 		adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		adminFrame.getContentPane().setLayout(null);
+
 		
-		JLabel lblAdmin = new JLabel("Admin Form");
+		JLabel lblAdmin = new JLabel(CurrentLogginUser.getCurrentUser().getEmp_name());
 		lblAdmin.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 18));
 		lblAdmin.setBounds(288, 10, 127, 40);
 		adminFrame.getContentPane().add(lblAdmin);
-		
+
 		JButton btnEmployee = new JButton("Employee List");
 		btnEmployee.setBounds(60, 86, 146, 74);
 		adminFrame.getContentPane().add(btnEmployee);
-		
+
 		JButton btnProduct = new JButton("Product List");
 		btnProduct.setBounds(269, 86, 146, 74);
 		adminFrame.getContentPane().add(btnProduct);
-		
+
 		JButton btnBrand = new JButton("Brand List");
 		btnBrand.setBounds(467, 86, 146, 74);
 		adminFrame.getContentPane().add(btnBrand);
-		
+
 		JButton btnCategory = new JButton("Category List");
 		btnCategory.setBounds(60, 245, 146, 74);
 		adminFrame.getContentPane().add(btnCategory);
-		
+
 		JButton btnSupplier = new JButton("Supplier List");
 		btnSupplier.setBounds(269, 245, 146, 74);
 		adminFrame.getContentPane().add(btnSupplier);
-		
+
 		btnEmployee.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				EmployeeForm employeeForm=new EmployeeForm();
+				EmployeeForm employeeForm = new EmployeeForm();
 				employeeForm.employeeFrame.setVisible(true);
 				adminFrame.setVisible(false);
 			}

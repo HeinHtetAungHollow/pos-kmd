@@ -9,6 +9,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -89,5 +92,20 @@ public class BrandForm {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(405, 450, 91, 21);
 		brandFrame.getContentPane().add(btnDelete);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(570, 450, 91, 21);
+		brandFrame.getContentPane().add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				AdminForm adminForm=new AdminForm();
+				adminForm.adminFrame.setVisible(true);
+				brandFrame.setVisible(false);
+			}
+		});
 	}
 }

@@ -32,6 +32,7 @@ public class LoginServices implements LoginRepo {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return employee;
 	}

@@ -16,6 +16,7 @@ import models.Employee;
 import models.UserRole;
 import services.EmployeeServices;
 import services.LoginServices;
+import util.login.CurrentLogginUser;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -128,6 +129,7 @@ public class LoginForm {
 					if (!username.isBlank() && !password.isBlank()) {
 						employee = loginServices.login(username, password);
 						if (employee != null) {
+							CurrentLogginUser.setCurrentUser(employee);
 							AdminForm adminForm=new AdminForm();
 							EmployeeForm employeeForm = new EmployeeForm();
 							if(employee.getRole().equals(UserRole.ADMIN) ) {

@@ -29,8 +29,7 @@ public class MapToPurchase {
 			purchase.setPurchaseDateTime(LocalDateTime.parse(rs.getString("purchaseDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
 			purchase.setDescription(rs.getString("description"));
 			Employee employee=new Employee();
-			employee.setEmp_id(rs.getInt("employee_id"));
-			
+			employee.setEmp_id(rs.getInt("employee_id"))
 			
 		} catch (Exception e) {
 			// TODO: handle exception
